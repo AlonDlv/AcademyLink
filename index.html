@@ -1,25 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AcademyLink HIT</title>
-  <!-- Tailwind via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            teal: { 400: '#38b2ac' }
-          }
-        }
-      }
-    }
-  </script>
+  <title>התא של אקדמי לינק – מידע ומשחק</title>
+  <link rel="stylesheet" href="style-info.css" />
 </head>
-<body class="bg-gray-50 font-sans">
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+<body>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="logo-box">
+        <img src="logo.png" alt="לוגו אקדמי לינק">
+      </div>
+      <div class="text-box">
+        <h1>התא של אקדמי לינק</h1>
+        <p>
+          היי! אנחנו התא הסטודנטיאלי "אקדמי לינק" ב-HIT ואנחנו שמחים להזמין אותך
+          לחוויית ניווט וידע ברחבי הקמפוס. המשחק שלנו, 
+          <strong>“חפש את המטמון”</strong>, משלב רמזים, אתגרים והיכרות עם
+          כל הפינות והשירותים שתומכים בסטודנטים.
+        </p>
+        <p class="qr-prompt">סרקו את קוד ה-QR כדי להתחיל את המסע!</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="contact-bar">
+    <p>
+      לכל שאלה, משוב או הצעות: 
+      <a href="mailto:academiclink@hit.ac.il">academiclink@hit.ac.il</a>
+    </p>
+  </footer>
 </body>
 </html>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
+
+:root {
+  --main-teal:   #00bfa6;
+  --accent-pink: #ec407a;
+  --accent-yellow: #ffcc80;
+  --text-dark:   #222;
+  --text-light:  #555;
+  --bg-light:    #f9fdfc;
+  --bg-white:    #ffffff;
+  --max-width:   900px;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Assistant', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  direction: rtl;
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero {
+  background: linear-gradient(135deg, #e0fcf8 0%, #fbf8ff 100%);
+  padding: 4rem 0;
+}
+
+.hero-grid {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo-box {
+  flex: 1;
+  text-align: center;
+}
+.logo-box img {
+  max-width: 100%;
+  width: 300px;
+  background: var(--bg-white);
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.text-box {
+  flex: 2;
+}
+.text-box h1 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem;
+  color: var(--main-teal);
+}
+.text-box p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+.text-box .qr-prompt {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent-pink);
+}
+
+.contact-bar {
+  background-color: var(--accent-yellow);
+  text-align: center;
+  padding: 1.2rem 0;
+}
+.contact-bar p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+.contact-bar a {
+  color: var(--text-dark);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    flex-direction: column;
+  }
+  .logo-box img {
+    width: 200px;
+  }
+  .text-box h1 {
+    font-size: 2rem;
+  }
+}
+</style>
