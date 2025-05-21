@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>כניסה לתחנה</title>
-  <link rel="stylesheet" href="./station-style.css" />
 </head>
 <body>
   <div class="container">
@@ -18,8 +17,7 @@
   </div>
 
   <script>
-    function checkCode() {
-       async function checkCode() {
+      async function checkCode() {
     const codeInput = document.getElementById('codeInput');
     const error     = document.getElementById('errorMsg');
     const code      = codeInput.value.trim().toUpperCase();
@@ -50,7 +48,6 @@
       error.classList.remove('hidden');
     }
   }
-    }
   </script>
 </body>
 </html>
