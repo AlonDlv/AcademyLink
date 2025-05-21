@@ -19,23 +19,37 @@
 
   <script>
     function checkCode() {
-      const code = document.getElementById('codeInput').value.trim().toUpperCase(); // תמיכה באותיות קטנות/גדולות
-      const error = document.getElementById('errorMsg');
+       async function checkCode() {
+    const codeInput = document.getElementById('codeInput');
+    const error     = document.getElementById('errorMsg');
+    const code      = codeInput.value.trim().toUpperCase();
 
-      // רשימת הקודים והעמודים שאליהם הם מפנים
-      const codeMap = {
-        "HIT2025": "station1-content.html",
-        "000000": "station2-content.html",
-        "1463": "station3-content.html",
-        "8647": "station4-1-fake.html",
-        "1810": "station4-2.html"
-      };
+    // hide previous error
+    error.classList.add('hidden');
 
-      if (codeMap[code]) {
-        window.location.href = codeMap[code];
+    try {
+      const resp = await fetch(
+        `https://crm.primetech-ltd.co.il/hit/?code=${encodeURIComponent(code)}`,
+        { method: 'GET', headers: { 'Accept': 'text/plain' } }
+      );
+
+      if (resp.status === 200) {
+        // got a page name back
+        const page = await resp.text();
+        window.location.href = page;
+      } else if (resp.status === 204) {
+        // invalid code
+        error.classList.remove('hidden');
       } else {
-        error.classList.remove("hidden");
+        // unexpected status
+        console.warn('Unexpected response status:', resp.status);
+        error.classList.remove('hidden');
       }
+    } catch (err) {
+      console.error('Fetch error:', err);
+      error.classList.remove('hidden');
+    }
+  }
     }
   </script>
 </body>
