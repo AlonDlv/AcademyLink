@@ -4,6 +4,73 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>כניסה לתחנה</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Assistant', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to left, #e0f7fa, #fce4ec);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      direction: rtl;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card h1 {
+      color: #00bfa6;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.5rem;
+      background-color: #ec407a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #d81b60;
+    }
+
+    .error {
+      color: red;
+      margin-top: 1rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -12,122 +79,37 @@
       <p>הכניסו את הקוד שקיבלתם בתחנה כדי להמשיך:</p>
 
       <input type="text" id="codeInput" placeholder="הקלידו קוד..." />
+      <p id="errorMsg" class="error hidden">הקוד שהוזן שגוי. נסו שוב.</p>
       <button onclick="checkCode()">אימות</button>
     </div>
   </div>
 
   <script>
-      async function checkCode() {
-    const codeInput = document.getElementById('codeInput');
-    const error     = document.getElementById('errorMsg');
-    const code      = codeInput.value.trim().toUpperCase();
+    async function checkCode() {
+      const codeInput = document.getElementById('codeInput');
+      const error     = document.getElementById('errorMsg');
+      const code      = codeInput.value.trim().toUpperCase();
 
-    // hide previous error
-    error.classList.add('hidden');
+      error.classList.add('hidden');
 
-    try {
-      const resp = await fetch(
-        `https://crm.primetech-ltd.co.il/hit/?code=${encodeURIComponent(code)}`,
-        { method: 'GET', headers: { 'Accept': 'text/plain' } }
-      );
-      console.log(resp)
-      if (resp.status === 200) {
-        // got a page name back
-        const page = await resp.text();
-        window.location.href = page;
-      } else if (resp.status === 204) {
-        // invalid code
-        error.classList.remove('hidden');
-      } else {
-        // unexpected status
-        console.warn('Unexpected response status:', resp.status);
+      try {
+        const resp = await fetch(
+          `https://crm.primetech-ltd.co.il/hit/?code=${encodeURIComponent(code)}`,
+          { method: 'GET', headers: { 'Accept': 'text/plain' } }
+        );
+        console.log(resp);
+        if (resp.status === 200) {
+          const page = await resp.text();
+          window.location.href = page;
+        } else {
+          error.classList.remove('hidden');
+        }
+      } catch (err) {
+        console.error('Fetch error:', err);
+        error.textContent = 'שגיאה בשרת. נסו שוב מאוחר יותר.';
         error.classList.remove('hidden');
       }
-    } catch (err) {
-      console.error('Fetch error:', err);
-      error.classList.remove('hidden');
     }
-  }
   </script>
 </body>
 </html>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
-
-body {
-  font-family: 'Assistant', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to left, #e0f7fa, #fce4ec);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  direction: rtl;
-}
-
-.container {
-  width: 90%;
-  max-width: 400px;
-}
-
-.card {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.card h1 {
-  color: #00bfa6;
-  margin-bottom: 1rem;
-}
-
-input[type="text"] {
-  width: 80%;
-  padding: 0.6rem;
-  font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  margin-top: 1rem;
-}
-
-button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.5rem;
-  background-color: #ec407a;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background-color: #d81b60;
-}
-
-#secretContent {
-  margin-top: 2rem;
-}
-
-#secretContent img,
-#secretContent video {
-  max-width: 100%;
-  border-radius: 12px;
-  margin-top: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.error {
-  color: red;
-  margin-top: 1rem;
-}
-
-.hidden {
-  display: none;
-}
-</style>
