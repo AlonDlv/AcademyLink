@@ -30,11 +30,10 @@
         `https://crm.primetech-ltd.co.il/hit/?code=${encodeURIComponent(code)}`,
         { method: 'GET', headers: { 'Accept': 'text/plain' } }
       );
-
+      console.log(resp)
       if (resp.status === 200) {
         // got a page name back
         const page = await resp.text();
-        console.log(page)
         window.location.href = page;
       } else if (resp.status === 204) {
         // invalid code
