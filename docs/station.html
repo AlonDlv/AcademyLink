@@ -5,44 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>כניסה לתחנה</title>
   <style>
-  <link rel="stylesheet" href="station-style.css" />
-</head>
-<body>
-  <div class="container">
-    <div class="card">
-      <h1>חפש את המטמון</h1>
-      <p>הכניסו את הקוד שקיבלתם בתחנה כדי להמשיך:</p>
-
-      <input type="text" id="codeInput" placeholder="הקלידו קוד..." />
-      <button onclick="checkCode()">אימות</button>
-    </div>
-  </div>
-
-  <script>
-    function checkCode() {
-      const code = document.getElementById('codeInput').value.trim().toUpperCase(); // תמיכה באותיות קטנות/גדולות
-      const error = document.getElementById('errorMsg');
-
-      // רשימת הקודים והעמודים שאליהם הם מפנים
-      const codeMap = {
-        "HIT2025": "station1-content.html",
-        "000000": "station2-content.html",
-        "1463": "station3-content.html",
-        "8647": "station4-1-fake.html",
-        "1810": "station4-2.html"
-      };
-
-      if (codeMap[code]) {
-        window.location.href = codeMap[code];
-      } else {
-        error.classList.remove("hidden");
-      }
-    }
-  </script>
-</body>
-</html>
-
-<style>
     @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
 
     body {
@@ -105,7 +67,43 @@
       margin-top: 1rem;
     }
 
-.hidden {
-  display: none;
-}
-</style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>חפש את המטמון</h1>
+      <p>הכניסו את הקוד שקיבלתם בתחנה כדי להמשיך:</p>
+
+      <input type="text" id="codeInput" placeholder="הקלידו קוד..." />
+      <p id="errorMsg" class="error hidden">הקוד שהוזן שגוי. נסו שוב.</p>
+      <button onclick="checkCode()">אימות</button>
+    </div>
+  </div>
+
+  <script>
+    function checkCode() {
+      const code = document.getElementById('codeInput').value.trim().toUpperCase(); // תמיכה באותיות קטנות/גדולות
+      const error = document.getElementById('errorMsg');
+
+      // רשימת הקודים והעמודים שאליהם הם מפנים
+      const codeMap = {
+        "HIT2025": "station1-content.html",
+        "000000": "station2-content.html",
+        "1463": "station3-content.html",
+        "8647": "station4-1-fake.html",
+        "1810": "station4-2.html"
+      };
+
+      if (codeMap[code]) {
+        window.location.href = codeMap[code];
+      } else {
+        error.classList.remove("hidden");
+      }
+    }
+  </script>
+</body>
+</html>
