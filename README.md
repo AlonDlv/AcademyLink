@@ -7,7 +7,7 @@ This website was created to promote the rights and accessibility of differently-
 
 ---
 
-## 🌍 Vision
+## 🌍 Aim
 To bridge the gap between accessibility and everyday campus life. Empowering all students to participate equally, navigate campus easily, and raise awareness of accessibility challenges.
 
 ---
