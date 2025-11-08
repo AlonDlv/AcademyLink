@@ -3,7 +3,7 @@
 **AcademyLink** is an accessibility and inclusion initiative developed at the **Holon Institute of Technology (HIT)** in collaboration with **Link20** and the **HIT Student Union**.  
 It aims to make campuses more **inclusive, navigable, and accessible** for students with disabilities through awareness, technology, and interaction.
 
-This website was created to promote the rights and accessibility of differently-abled people by offering a **treasure-hunt experience** across campus!🗺️
+This website was created to promote the rights and accessibility of differently-abled people by offering a **treasure-hunt experience** across campus!
 
 ---
 
